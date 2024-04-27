@@ -29,15 +29,6 @@ app.use("/abracadabra/juego/:usuario", (req, res, next) => {
   }
 });
 
-app.use("/abracadabra/conejo/:n", (req, res, next) => {
-  const azar = Math.floor(Math.random() * 4 + 1);
-  if (req.params.n == azar) {
-    next();
-  } else {
-    res.sendFile(`${__dirname}/assets/voldemort.jpg`);
-  }
-});
-
 //Routes
 app.get("/abracadabra/usuarios", (req, res) => {
   res.json({
@@ -50,7 +41,12 @@ app.get("/abracadabra/juego/:usuario", (req, res) => {
 });
 
 app.get("/abracadabra/conejo/:n", (req, res) => {
-  res.sendFile(__dirname + "/assets/conejito.jpg");
+  const azar = Math.floor(Math.random() * 4 + 1);
+  if (req.params.n == azar) {
+    res.sendFile(__dirname + "/assets/conejito.jpg");
+  } else {
+    res.sendFile(`${__dirname}/assets/voldemort.jpg`);
+  }
 });
 
 app.get("*", (req, res) => {
